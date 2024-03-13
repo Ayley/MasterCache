@@ -1,0 +1,23 @@
+name: flutter_master_cache
+description: "A simple cache manager"
+version: 0.0.1
+authors: [Kleidukos]
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  path_provider: ^2.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  very_good_analysis: ^5.1.0
+
+
+flutter:
