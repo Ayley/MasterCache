@@ -8,10 +8,12 @@ class CacheFileUtils {
     return File('$dir/$filename');
   }
 
-  static Future<File> createFile(String filename,
-      {bool recursiv = false}) async {
+  static Future<File> createFile(
+    String filename, {
+    bool recursive = false,
+  }) async {
     final file = await getFile(filename);
-    return await file.create(recursive: recursiv);
+    return file.create(recursive: recursive);
   }
 
   static Future<bool> existFile(String filename) async {
