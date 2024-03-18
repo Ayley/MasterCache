@@ -28,9 +28,13 @@ class CachedNetworkImage extends StatelessWidget {
   final ImageErrorWidgetBuilder? errorBuilder;
   final ImageFrameBuilder? frameBuilder;
 
-  final String _dir = 'images/';
+  static const String _dir = 'images/';
 
   File? _file;
+
+  static Future<void> deleteCache(){
+    return CacheFileUtils.deleteFile(_dir);
+  }
 
   Future<File> _downloadImage(String filename) async {
     final res = await http.get(Uri.parse(url));

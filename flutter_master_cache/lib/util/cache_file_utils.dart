@@ -63,13 +63,13 @@ class CacheFileUtils {
     return String.fromCharCodes(content);
   }
 
-  static Future<void> deleteFile(String filename) async {
+  static Future<void> deleteFile(String filename, {bool recursive = false}) async {
     final file = await getFile(filename);
-    await file.delete();
+    await file.delete(recursive: recursive);
   }
 
   static Future<void> deleteCache() async {
     final dir = await getApplicationCacheDirectory();
-    await dir.delete();
+    await dir.delete(recursive: true);
   }
 }
