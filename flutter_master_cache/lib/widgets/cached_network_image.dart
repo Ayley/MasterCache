@@ -33,7 +33,7 @@ class CachedNetworkImage extends StatelessWidget {
   File? _file;
 
   static Future<void> deleteCache(){
-    return CacheFileUtils.deleteFile(_dir);
+    return CacheFileUtils.deleteFile(_dir, recursive: true);
   }
 
   Future<File> _downloadImage(String filename) async {
