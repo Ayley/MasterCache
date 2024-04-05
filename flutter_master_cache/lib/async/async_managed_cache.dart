@@ -132,6 +132,8 @@ class AsyncManagedCache<K, V> extends AsyncBaseCache<K, V> {
         reloadDuration: reloadDuration,
         onReload: _reloadItem,
       );
+
+      onReloaded?.call(k);
     }
 
     return res;
