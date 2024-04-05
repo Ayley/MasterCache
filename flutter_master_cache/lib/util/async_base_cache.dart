@@ -1,3 +1,5 @@
+import 'dart:async';
+
 abstract class AsyncBaseCache<K, V> {
 
   ///Register future for key
@@ -9,6 +11,9 @@ abstract class AsyncBaseCache<K, V> {
 
   ///Get value in cache or get fallback or null
   Future<V?> get(K k, {V? fallback});
+
+  ///Force update for a value when a future is registered
+  Future<V?> update(K k);
 
   ///Set value in cache, if the value is present it will be overwritten
   ///Returns true when element is overwritten otherwise false

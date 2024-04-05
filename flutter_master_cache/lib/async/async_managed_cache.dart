@@ -115,6 +115,28 @@ class AsyncManagedCache<K, V> extends AsyncBaseCache<K, V> {
   @override
   void dispose() {}
 
+  @override
+  Future<V?> update(K k) async {
+    if(!_futures.containsKey(k)){
+      return null;
+    }
+
+    final res = await _futures[k]?.call();
+
+    if(res != null){
+      _cache[k] = _ManagedItem(
+        key: k,
+        value: res,
+        expireDuration: expireDuration,
+        onExpired: _expiredItem,
+        reloadDuration: reloadDuration,
+        onReload: _reloadItem,
+      );
+    }
+
+    return res;
+  }
+
   void _expiredItem(K k, V? v) {
     remove(k);
 

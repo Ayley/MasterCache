@@ -74,4 +74,19 @@ class AsyncCache<K, V> extends AsyncBaseCache<K, V>{
   @override
   void dispose() {}
 
+  @override
+  Future<V?> update(K k) async {
+    if(!_futures.containsKey(k)){
+      return null;
+    }
+
+    final res = await _futures[k]?.call();
+
+    if(res != null){
+      _cache[k] = res;
+    }
+
+    return res;
+  }
+
 }
