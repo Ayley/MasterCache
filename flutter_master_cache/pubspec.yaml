@@ -1,6 +1,6 @@
 name: flutter_master_cache
 description: "A simple cache manager"
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/Ayley/MasterCache/tree/master/flutter_master_cache
 
 environment:
