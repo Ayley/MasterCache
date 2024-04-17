@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_master_cache/util/cache_file_utils.dart';
 import 'package:http/http.dart' as http;
@@ -47,14 +48,16 @@ class CachedNetworkImage extends StatelessWidget {
   }
 
   Future<File> _load() async {
-    if (_file != null) {
-      return _file!;
-    }
-
     final filename = name ?? url.hashCode.toString();
 
     if (await CacheFileUtils.existFile(_dir + filename)) {
       _file = await CacheFileUtils.getFile(_dir + filename);
+    }else{
+      _file = null;
+    }
+
+    if(_file != null ){
+      return _file!;
     }
 
     _file ??= await _downloadImage(_dir + filename);
@@ -68,8 +71,11 @@ class CachedNetworkImage extends StatelessWidget {
       future: _load(),
       builder: (context, s) {
         if (s.hasData) {
-          return Image.file(
-            s.data!,
+          if(!s.requireData.existsSync()){
+            return loadingWidget ?? Container();
+          }
+          return Image.memory(
+            s.requireData.readAsBytesSync(),
             fit: fit,
             width: size?.width,
             height: size?.height,
@@ -91,3 +97,5 @@ class CachedNetworkImage extends StatelessWidget {
     );
   }
 }
+
+
